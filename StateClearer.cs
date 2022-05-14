@@ -59,32 +59,15 @@ namespace Editor.Private
                     return;
                 }
                 
-                var option = EditorUtility.DisplayDialogComplex(PromptTitle,
-                    "Would you like to clear the state?",
-                    "Clear State",
-                    $"Remind Me in {RemindMeHours} Hours",
-                    "Don't Prompt Again");
-                
-                switch(option)
+                if (EditorUtility.DisplayDialog(PromptTitle, "Would you like to clear the state?", "Clear State",
+                    $"Remind Me in {RemindMeHours} Hours"))
                 {
-                    case 0:
-                    {
-                        ClearState();
-                        RemindLater();
-                        break;
-                    }
-                
-                    case 1:
-                    {
-                        RemindLater();
-                        break;
-                    }
-
-                    case 2:
-                    {
-                        EnableStateClearer = false;
-                        break;
-                    }
+                    ClearState();
+                    RemindLater();
+                }
+                else
+                {
+                    RemindLater();
                 }
             }
         }
